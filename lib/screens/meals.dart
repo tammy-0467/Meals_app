@@ -6,16 +6,16 @@ import 'package:meals_app/widgets/meal_item.dart';
 //page for showing the meals within a selected category
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({super.key, this.title, required this.meals, required this.onToggleFavorite});
+  const MealsScreen({super.key, this.title, required this.meals,});
 
   final String? title;
-  //instance of the meal class as a list
+  //page requires a meals list, if you're navigating through the categories screen it gives a filtered meals list
+  //if you're navigating through the tab bar, you get a favourite meals list
   final List<Meal> meals;
-  final void Function(Meal meal) onToggleFavorite;
 
 
   void selectMeal (BuildContext context, Meal meal){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MealDetailsScreen(meal: meal, onToggleFavorite: onToggleFavorite,)));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MealDetailsScreen(meal: meal,)));
   }
 
 
@@ -56,10 +56,14 @@ class MealsScreen extends StatelessWidget {
       );
     }
 
+    // if title is null return the content as is because the tab bar provides a scaffold and app bar
     if(title == null){
       return content;
     }
+    //else return the content with a scaffold and appbar
     return Scaffold(
+      //the title is nullable because this screen is used for the list of meals when clicking a category
+      // and the favorites screen. This screen has it's title provided by the tab bar page, hence the nullable effect
       appBar: AppBar(title: Text(title!)),
       body: content,
     );
