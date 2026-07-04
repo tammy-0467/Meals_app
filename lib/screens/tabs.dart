@@ -29,13 +29,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
 
 
-
-  void _showInfoMessage(String message) {
-
-  }
-
-
-
   //function for switching the index of the selected page index
   void _selectPage(int index) {
     setState(() {
